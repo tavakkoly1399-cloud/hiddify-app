@@ -106,7 +106,7 @@ dev_dependencies:
   slang_build_runner: ^4.4.0
   flutter_gen_runner: ^5.4.0
   dart_mappable_builder: ^4.2.1
-  analyzer: ^14.1.0
+  analyzer: ^7.6.0
 
 flutter:
   uses-material-design: true
