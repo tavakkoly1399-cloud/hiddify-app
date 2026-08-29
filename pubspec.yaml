@@ -195,3 +195,10 @@ sentry:
   upload_sources: true
   log_level: info
   ignore_missing: true
+
+msix_config:
+  display_name: Light Speed VPN
+  publisher_display_name: Light Speed
+  identity_name: com.lightspeed.vpn
+  msix_version: 4.1.2.0
+  certificate_password: tavakoli89
