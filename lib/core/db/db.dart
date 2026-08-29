@@ -19,8 +19,13 @@ class Db extends _$Db with InfraLogger {
     return LazyDatabase(
       () => driftDatabase(
         name: "db",
-        native: const DriftNativeOptions(databaseDirectory: AppDirectories.getDatabaseDirectory),
-        web: DriftWebOptions(sqlite3Wasm: Uri.parse('sqlite3.wasm'), driftWorker: Uri.parse('drift_worker.js')),
+        native: const DriftNativeOptions(
+          databaseDirectory: AppDirectories.getDatabaseDirectory,
+        ),
+        web: DriftWebOptions(
+          sqlite3Wasm: Uri.parse('sqlite3.wasm'),
+          driftWorker: Uri.parse('drift_worker.js'),
+        ),
       ),
     );
   }
@@ -46,7 +51,8 @@ class ProfileEntries extends Table {
   TextColumn get name => text().withLength(min: 1)();
   TextColumn get url => text().nullable()();
   DateTimeColumn get lastUpdate => dateTime()();
-  IntColumn get updateInterval => integer().nullable().map(DurationTypeConverter())();
+  IntColumn get updateInterval =>
+      integer().nullable().map(DurationTypeConverter())();
   IntColumn get upload => integer().nullable()();
   IntColumn get download => integer().nullable()();
   IntColumn get total => integer().nullable()();
@@ -64,7 +70,8 @@ class ProfileEntries extends Table {
 class AppProxyEntries extends Table {
   TextColumn get mode => textEnum<AppProxyMode>()();
   TextColumn get pkgName => text()();
-  IntColumn get flags => integer().withDefault(const Constant(0))();
+  IntColumn get flags =>
+      integer().withDefault(const Constant(0))();
 
   @override
   Set<Column> get primaryKey => {mode, pkgName};
