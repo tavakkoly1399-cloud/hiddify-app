@@ -71,7 +71,9 @@ dependencies:
   json_path: ^0.7.1
   in_app_review: ^2.0.10
   circle_flags:
-    git: https://github.com/hiddify-com/flutter_circle_flags.git
+    git:
+      url: https://github.com/hiddify-com/flutter_circle_flags.git
+      ref: main
   fixnum: ^1.1.0
   protobuf: ^5.0.0
   grpc: ^4.0.1
@@ -83,7 +85,9 @@ dependencies:
   flutter_markdown_plus: ^1.0.6
   file_picker: ^8.1.7
   installed_apps:
-    git: https://github.com/VB10/installed_apps
+    git:
+      url: https://github.com/VB10/installed_apps
+      ref: master
 
   recase: ^4.1.0
   app_links: ^6.4.0
@@ -161,4 +165,4 @@ msix_config:
   publisher_display_name: Light Speed
   identity_name: com.lightspeed.vpn
   msix_version: 4.1.2.0
-  certificate_password: tavakoli89
+  certificate_password: ${CERT_PASSWORD}
