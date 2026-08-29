@@ -5,10 +5,6 @@ version: 4.1.2+40102
 
 environment:
   sdk: ^3.10.4
-  # ! IMPORTANT !
-  # This SDK version is strictly required and must not be removed.
-  # It is parsed/grep-ed by Makefile and Dockerfile to configure the build environment.
-  # Ensure this matches the target Flutter version.
   flutter: ^3.38.5
 
 dependencies:
@@ -29,7 +25,6 @@ dependencies:
   rxdart: ^0.28.0
   drift: ^2.21.0
   drift_flutter: ^0.2.1
-  dr
   shared_preferences: ^2.5.2
   dio: ^5.4.1
   ffi: ^2.1.2
@@ -102,7 +97,7 @@ dev_dependencies:
   json_serializable: ^6.7.1
   freezed: ^2.4.7
   riverpod_generator: ^2.4.3
-    drift_dev: ^2.21.0
+  drift_dev: ^2.21.0
   ffigen: ^19.1.0
   slang_build_runner: ^4.4.0
   flutter_gen_runner: ^5.4.0
