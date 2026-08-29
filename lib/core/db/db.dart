@@ -1,7 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 import 'package:hiddify/core/db/converters/duration_converter.dart';
-import 'package:hiddify/core/db/db.steps.dart';
 import 'package:hiddify/core/directories/directories_provider.dart';
 import 'package:hiddify/features/per_app_proxy/model/per_app_proxy_mode.dart';
 import 'package:hiddify/features/profile/model/profile_entity.dart';
@@ -32,46 +31,10 @@ class Db extends _$Db with InfraLogger {
       onCreate: (Migrator m) async {
         await m.createAll();
       },
-      onUpgrade: stepByStep(
-        from1To2: (m, schema) async {
-          await m.alterTable(
-            TableMigration(
-              schema.profileEntries,
-              columnTransformer: {schema.profileEntries.type: const Constant<String>("remote")},
-              newColumns: [schema.profileEntries.type],
-            ),
-          );
-        },
-        from2To3: (m, schema) async {
-          await m.createTable(schema.geoAssetEntries);
-        },
-        from3To4: (m, schema) async {
-          final testUrlExists = await _columnExists(
-            schema.profileEntries.actualTableName,
-            schema.profileEntries.testUrl.name,
-          );
-          if (!testUrlExists) {
-            await m.addColumn(schema.profileEntries, schema.profileEntries.testUrl);
-          }
-        },
-        from4To5: (m, schema) async {
-          await m.deleteTable('geo_asset_entries');
-          await m.renameColumn(schema.profileEntries, 'test_url', schema.profileEntries.profileOverride);
-          await m.addColumn(schema.profileEntries, schema.profileEntries.userOverride);
-          await m.addColumn(schema.profileEntries, schema.profileEntries.populatedHeaders);
-
-          await m.createTable(schema.appProxyEntries);
-        },
-        from5To6: (m, schema) async {
-          await m.dropColumn(schema.profileEntries, 'profile_override');
-        },
-      ),
+      onUpgrade: (Migrator m, int from, int to) async {
+        await m.createAll();
+      },
     );
-  }
-
-  Future<bool> _columnExists(String table, String column) async {
-    final result = await customSelect('PRAGMA table_info($table);').get();
-    return result.any((row) => row.data['name'] == column);
   }
 }
 
